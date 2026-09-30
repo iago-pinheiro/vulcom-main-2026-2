@@ -13,14 +13,21 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
   .map(origin => origin.trim())
   .filter(Boolean) ?? []
 
+import cors from 'cors'
+
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS.split(','),
+  // credentials: true
+}))
+
 app.use((req, res, next) => {
   const origin = req.headers.origin
-  if(origin && allowedOrigins.includes(origin)) {
+  if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin)
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
   }
-  if(req.method === 'OPTIONS') return res.status(204).end()
+  if (req.method === 'OPTIONS') return res.status(204).end()
   next()
 })
 
