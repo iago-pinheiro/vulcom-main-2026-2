@@ -1,19 +1,35 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    
-    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-        
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto VULCOM &bull; vulnerabilidades comuns</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+ <head>
+   <meta charset="UTF-8" />
+
+   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+   <link rel="shortcut icon" href="/favicon.ico" />
+   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+   <link rel="manifest" href="/site.webmanifest" />
+
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+   <!-- *** SOLUÇÃO XSS 1: Configuração de CSP (Content Security Policy) -->
+   <!--meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"-->
+
+
+   <meta
+     http-equiv="Content-Security-Policy"
+     content="
+       default-src 'self';
+       script-src 'self';
+       style-src 'self' 'unsafe-inline';
+       connect-src 'self' http://localhost:8888 ws://localhost:5173 ws://127.0.0.1:5173;
+     "
+   >
+
+   <title>Projeto VULCOM &bull; vulnerabilidades comuns</title>
+ </head>
+ <body>
+   <div id="root"></div>
+   <script type="module" src="/src/main.jsx"></script>
+ </body>
 </html>
